@@ -1,6 +1,6 @@
-import {Router, Request, Response} from 'express'
+import {Router} from 'express'
 const router: Router = Router()
-import * as controller from "../../controllers/client/topic.controlles"
+import * as controller from "../../controllers/client/topic.controller"
 router.get("/", controller.index);
 
 export const topicRoutes: Router = router 
