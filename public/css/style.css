@@ -223,3 +223,23 @@ body {
     font-size: 22px;
   }
 }
+
+
+/* hover */
+.inner-action.inner-like:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+/* active khi đã like */
+.inner-action.inner-like.active {
+  background: #38bdf8; 
+  color: #fff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
+}
+
+/* icon bên trong cũng đổi màu khi active */
+.inner-action.inner-like.active i {
+  color: #fff;
+}

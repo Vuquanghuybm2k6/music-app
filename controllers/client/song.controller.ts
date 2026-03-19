@@ -31,6 +31,7 @@ export const list = async (req: Request, res: Response) => {
     songs
   })
 }
+
 // [GET]: /songs/detail/:slugSong
 export const detail = async (req: Request, res: Response) => {
   const slugSong: string = req.params.slugSong as string
@@ -52,5 +53,27 @@ export const detail = async (req: Request, res: Response) => {
     song,
     singer,
     topic
+  })
+}
+
+// [PATCH]: /songs/:typeLike/:idSong
+export const like = async (req: Request, res: Response) => {
+  const idSong:string = req.params.idSong as string
+  const typeLike: string = req.params.typeLike as string
+  const song = await Song.findOne({
+    _id: idSong,
+    status: "active",
+    deleted: false
+  })
+  const newLike:number = typeLike == "like" ? song.like + 1 : song.like-1
+  await Song.updateOne({
+    _id: idSong,
+  },{
+    like: typeLike == "like" ? song.like + 1 : song.like-1
+  })
+  res.json({
+    code:200,
+    message: "Cập nhật lượt like thành công",
+    like: newLike
   })
 }
