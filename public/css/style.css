@@ -243,3 +243,25 @@ body {
 .inner-action.inner-like.active i {
   color: #fff;
 }
+
+/* ===== Nút Heart / Bài hát yêu thích ===== */
+.inner-action.inner-heart {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.inner-action.inner-heart:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+.inner-action.inner-heart.active {
+  background: #ef4444; /* màu đỏ tươi khi active */
+  color: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+}
+
+.inner-action.inner-heart.active i {
+  color: #fff; /* icon đổi màu trắng khi active */
+}
