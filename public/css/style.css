@@ -256,7 +256,7 @@ body {
 }
 
 .inner-action.inner-heart.active {
-  background: #ef4444; /* màu đỏ tươi khi active */
+  background: #ef4444; 
   color: #fff;
   border-color: #ef4444;
   box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
@@ -264,4 +264,7 @@ body {
 
 .inner-action.inner-heart.active i {
   color: #fff; /* icon đổi màu trắng khi active */
+}
+.inner-heart.active i {
+  color: red;
 }
