@@ -110,3 +110,116 @@
 }
 
 /* End song-item */
+
+/* ===== BASE ===== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+/* ===== MAIN ===== */
+.singner-detail {
+  padding: 30px 0;
+}
+
+/* ===== TITLE ===== */
+.inner-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+/* ===== ACTIONS ===== */
+.inner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.inner-action {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.inner-action:hover {
+  background: #e2e8f0;
+}
+
+/* ===== PLAYER BOX ===== */
+.inner-play {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  background: #fff;
+}
+
+/* ===== AVATAR ===== */
+.inner-avatar img {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.inner-avatar img:hover {
+  transform: scale(1.03);
+}
+
+/* ===== PLAYER ===== */
+#aplayer {
+  flex: 1;
+}
+
+/* ===== DESCRIPTION ===== */
+.inner-desc {
+  border: 1px solid #eee;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  background: #fff;
+}
+
+/* ===== LABEL ===== */
+.inner-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2563eb;
+  font-size: 14px;
+}
+
+/* ===== TEXT ===== */
+.inner-text {
+  line-height: 1.6;
+  color: #444;
+  font-size: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .inner-play {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .inner-avatar img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .inner-title {
+    font-size: 22px;
+  }
+}
