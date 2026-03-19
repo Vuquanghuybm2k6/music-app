@@ -6,17 +6,27 @@ header.header
           a(href = "/")
             img(src = "/images/logo.svg", alt ="Logo")
       .col-5 
-        .boxx-search
-        form(method = "GET" action = "/search/result")
-          div(class ="form-group d-flex mb-0")
-            input(
-              type = "text"
-              placeholder = "Nhập từ khóa..."
-              class = "form-control"
-              name = "keyword"
-              value = keyword 
-            ) 
-            button(type = "submit" class ="btn btn-primary") Tìm
+        .box-search
+          form(method = "GET" action = "/search/result")
+            div(class ="form-group d-flex mb-0")
+              input(
+                type = "text"
+                placeholder = "Nhập từ khóa..."
+                class = "form-control"
+                name = "keyword"
+                value = keyword 
+              ) 
+              button(type = "submit" class ="btn btn-primary") Tìm
+          .inner-suggest.show
+            .inner-list
+              //- a(href="/songs/detail/:slugSong" class="inner-item")
+              //-   .inner-image
+              //-     img(src="https://backend.daca.vn/assets/images/cat-doi-noi-sau.jpg")
+              //-   .inner-info
+              //-     .inner-title Cắt đôi nỗi sầu
+              //-     .inner-singer
+              //-       i(class="fa-solid fa-microphone-lines")
+              //-       | Tăng Duy Tân
       .col-4 
         .inner-menu 
           ul 
