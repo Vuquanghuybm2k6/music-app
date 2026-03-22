@@ -6,7 +6,7 @@ export const index = async (req: Request, res: Response) => {
   const topics = await Topic.find({
     deleted: false
   })
-  res.render("admin/pages/topic/index",{
+  res.render("admin/pages/topics/index",{
     pageTitle: "Quản lí chủ đề",
     topics
   })
