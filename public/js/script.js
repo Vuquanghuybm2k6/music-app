@@ -3,6 +3,7 @@ const aplayer =document.querySelector("#aplayer")
 if(aplayer){
   let dataSong = aplayer.getAttribute("data-song")
   dataSong = JSON.parse(dataSong)
+  console.log(dataSong)
   let dataSinger = aplayer.getAttribute("data-singer")
   dataSinger = JSON.parse(dataSinger)
   const ap = new APlayer({
@@ -16,6 +17,19 @@ if(aplayer){
     autoplay: true,
     volume: 0.8
 });
+ap.on("ended", function () {
+  console.log("ket thuc")
+  const link = `/songs/listen/${dataSong._id}`
+  const option = {
+    method: "PATCH"
+  }
+  fetch(link, option)
+    .then(res => res.json())
+    .then(data=>{
+      const elementListenSpan = document.querySelector(".singe-detail .inner-listen span")
+      elementListenSpan.innerHTML  = `${data.listen} lượt nghe`
+    })
+})
 }
 // End APlayer
 
