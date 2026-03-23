@@ -21,6 +21,8 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 app.use('/tinymce', express.static(path.join(__dirname,'node_modules','tinymce')))
 // End Tiny MCE
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended : false}))
 
 import clientRoutes from "./routes/client/index.route";
 clientRoutes(app)
