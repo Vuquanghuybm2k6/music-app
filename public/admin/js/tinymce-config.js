@@ -2,7 +2,7 @@ tinymce.init({
   selector: "textarea.textarea-mce",
   license_key : 'gpl',
   plugins: "image",
-  images_upload_url: '/admin/upload'
+  images_upload_url: '/api/upload'
   // Upload image 
   // file_picker_callback: function(cb, value, meta) {
   //   var input = document.createElement('input');
