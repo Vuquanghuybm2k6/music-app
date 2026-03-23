@@ -1,0 +1,353 @@
+/* Header */
+.header {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.header .inner-logo img {
+  max-height: 100px;
+  max-width: 100%;
+}
+
+.header .inner-menu > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.header .inner-menu > ul > li {
+  margin-left: 20px;
+}
+/* End Header */
+
+/* Footer */
+.footer{
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+} 
+/* End Footer */
+
+/* Box-head */
+.box-head{
+    margin-bottom: 30px;
+}
+.box-head .inner-title{
+    margin-bottom: 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: green;
+}
+/* End Box-head */
+
+/* song-item */
+.song-item {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.song-item .inner-image {
+  width: 115px;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.song-item .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-item .inner-content {
+  padding: 10px;
+  flex: 1;
+}
+.song-item .inner-content .inner-title {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  margin-bottom: 5px;
+}
+
+.song-item .inner-content .inner-title a {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4d007d;
+}
+.song-item .inner-content .inner-title a:hover {
+  color: #7c00c8;
+  text-decoration: none;
+}
+
+.song-item .inner-content .inner-singer {
+  font-size: 13px;
+  font-weight: 500;
+  color: #828282;
+  margin-bottom: 2px;
+}
+
+.song-item .inner-content .inner-like {
+  font-size: 13px;
+  font-weight: 500;
+  color: #004cd0;
+  margin-bottom: 2px;
+}
+
+.song-item .inner-content .inner-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: #585858;
+}
+
+/* End song-item */
+
+/* ===== BASE ===== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+/* ===== MAIN ===== */
+.singner-detail {
+  padding: 30px 0;
+}
+
+/* ===== TITLE ===== */
+.inner-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+/* ===== ACTIONS ===== */
+.inner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.inner-action {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.inner-action:hover {
+  background: #e2e8f0;
+}
+
+/* ===== PLAYER BOX ===== */
+.inner-play {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  background: #fff;
+}
+
+/* ===== AVATAR ===== */
+.inner-avatar img {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.inner-avatar img:hover {
+  transform: scale(1.03);
+}
+
+/* ===== PLAYER ===== */
+#aplayer {
+  flex: 1;
+}
+
+/* ===== DESCRIPTION ===== */
+.inner-desc {
+  border: 1px solid #eee;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  background: #fff;
+}
+
+/* ===== LABEL ===== */
+.inner-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2563eb;
+  font-size: 14px;
+}
+
+/* ===== TEXT ===== */
+.inner-text {
+  line-height: 1.6;
+  color: #444;
+  font-size: 15px;
+  white-space: pre;
+}
+.singer-detail .inner-desc .inner-text {
+  white-space: pre;
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .inner-play {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .inner-avatar img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .inner-title {
+    font-size: 22px;
+  }
+}
+
+
+/* hover */
+.inner-action.inner-like:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+/* active khi đã like */
+.inner-action.inner-like.active {
+  background: #38bdf8; 
+  color: #fff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
+}
+
+/* icon bên trong cũng đổi màu khi active */
+.inner-action.inner-like.active i {
+  color: #fff;
+}
+
+/* ===== Nút Heart / Bài hát yêu thích ===== */
+.inner-action.inner-heart {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.inner-action.inner-heart:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+.inner-action.inner-heart.active {
+  background: #ef4444; 
+  color: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+}
+
+.inner-action.inner-heart.active i {
+  color: #fff; /* icon đổi màu trắng khi active */
+}
+.inner-heart.active i {
+  color: red;
+}
+
+/* ===== Box suggest ===== */
+.inner-suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Khi show */
+.inner-suggest.show {
+  display: block;
+}
+
+/* ===== List ===== */
+.inner-suggest .inner-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* ===== Item ===== */
+.inner-suggest .inner-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: #222;
+  transition: 0.2s;
+}
+
+/* Hover */
+.inner-suggest .inner-item:hover {
+  background: #f5f5f5;
+}
+
+/* ===== Image ===== */
+.inner-suggest .inner-image {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.inner-suggest .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Info ===== */
+.inner-suggest .inner-info {
+  flex: 1;
+}
+
+/* Title */
+.inner-suggest .inner-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 3px;
+
+  /* cắt chữ dài */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Singer */
+.inner-suggest .inner-singer {
+  font-size: 12px;
+  color: #777;
+}
