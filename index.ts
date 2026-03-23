@@ -21,6 +21,9 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 app.use('/tinymce', express.static(path.join(__dirname,'node_modules','tinymce')))
 // End Tiny MCE
 
+var methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended : false}))
 
