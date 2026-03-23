@@ -205,8 +205,11 @@ body {
   line-height: 1.6;
   color: #444;
   font-size: 15px;
+  white-space: pre;
 }
-
+.singer-detail .inner-desc .inner-text {
+  white-space: pre;
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .inner-play {

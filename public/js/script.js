@@ -8,11 +8,14 @@ if(aplayer){
   dataSinger = JSON.parse(dataSinger)
   const ap = new APlayer({
     container: aplayer,
+    lrcType: 1,
     audio: [{
         name: dataSong.title,
         artist: dataSinger,
         url: dataSong.audio,
-        cover: dataSong.avatar
+        cover: dataSong.avatar,
+        lrc:`${dataSong.lyrics}`
+            // cột đầu là phút, cột hai là giây, cột ba là mili giây
     }],
     autoplay: true,
     volume: 0.8
