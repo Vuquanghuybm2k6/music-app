@@ -7,7 +7,6 @@ import * as database from "./config/database"
 database.connect()
 
 const app: Express = express();
-const port: number | string= process.env.PORT || 3000;
 
 app.use(express.static(`${__dirname}/public`))
 
@@ -33,7 +32,11 @@ clientRoutes(app)
 import adminRoutes from "./routes/admin/index.route";
 adminRoutes(app)
 
+module.exports = app
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
+if (require.main === module) {
+  const port: number | string = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+}

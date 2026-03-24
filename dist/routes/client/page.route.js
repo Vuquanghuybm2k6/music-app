@@ -32,35 +32,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const path_1 = __importDefault(require("path"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-const database = __importStar(require("./config/database"));
-database.connect();
-const app = (0, express_1.default)();
-app.use(express_1.default.static(`${__dirname}/public`));
-app.set("views", `${__dirname}/views`);
-app.set("view engine", "pug");
-const config_1 = require("./config/config");
-app.locals.prefixAdmin = config_1.systemConfig.prefixAdmin;
-app.use('/tinymce', express_1.default.static(path_1.default.join(__dirname, 'node_modules', 'tinymce')));
-var methodOverride = require('method-override');
-app.use(methodOverride('_method'));
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
-const index_route_1 = __importDefault(require("./routes/client/index.route"));
-(0, index_route_1.default)(app);
-const index_route_2 = __importDefault(require("./routes/admin/index.route"));
-(0, index_route_2.default)(app);
-module.exports = app;
-if (require.main === module) {
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => {
-        console.log(`App listening on port ${port}`);
-    });
-}
+exports.pageRoutes = void 0;
+const express_1 = require("express");
+const router = (0, express_1.Router)();
+const controller = __importStar(require("../../controllers/client/page.controller"));
+router.get("/", controller.index);
+exports.pageRoutes = router;
