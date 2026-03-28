@@ -126,9 +126,52 @@ export const otpPasswordPost = async (req: Request, res: Response) => {
     res.redirect(req.get("Referer"))
   }
   else{
+    const user= await User.findOne({
+      email: email,
+      deleted: false
+    })
+    if (!user) {
+      console.log("User không tồn tại")
+      return res.redirect(req.get("Referer"))
+    }
+    res.cookie("tokenUser", user.tokenUser)
     res.render("client/pages/user/reset-password",{
       pageTitle: "Đặt lại mật khẩu",
       email
     })
+  }
+}
+
+// [GET]: /users/password/reset
+export const resetPassword = async (req: Request, res: Response) => {      
+  res.render("client/pages/user/reset-password",{
+    pageTitle: "Đặt lại mật khẩu",
+  })
+}
+
+// [POST]: /users/password/reset    
+export const resetPasswordPost = async (req: Request, res: Response) => {
+  const password = req.body.password  
+  const tokenUser = req.cookies?.tokenUser
+  if(!tokenUser){
+    console.log("Token không tìm thấy trong cookie")
+    return res.redirect('/user/login')
+  }
+  console.log(tokenUser)
+  const user = await User.findOne({
+    tokenUser: tokenUser,
+    deleted: false
+  })
+  if(!user){
+    console.log("Người dùng không tồn tại")
+    res.redirect(req.get("Referer"))
+  }
+  else{
+    await User.updateOne({
+      tokenUser: tokenUser
+    },{   
+      password: md5(password)
+    })
+    res.redirect("/user/login")
   }
 }

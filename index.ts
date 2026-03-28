@@ -20,8 +20,12 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 app.use('/tinymce', express.static(path.join(__dirname,'node_modules','tinymce')))
 // End Tiny MCE
 
+import cookieParser from 'cookie-parser'
+
 var methodOverride = require('method-override')
 app.use(methodOverride('_method'))
+
+app.use(cookieParser())
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended : false}))
