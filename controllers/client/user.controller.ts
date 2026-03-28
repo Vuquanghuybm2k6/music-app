@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
 import User from '../../models/user.model'
 import md5 from "md5"
-
+import ForgotPassword from "../../models/forgot-password.model"
+import * as generateHelper from '../../helpers/generate'
+import {sendMail} from '../../helpers/sendMail'
 // [GET]: /users/register
 export const register = async (req: Request, res: Response) => {
   res.render("client/pages/user/register",{
@@ -62,4 +64,41 @@ export const loginPost = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   res.clearCookie("tokenUser")
   res.redirect("/user/login")
+}
+
+// [GET]: /users/password/forgot
+export const forgotPassword = async (req: Request, res: Response) => {
+  res.render("client/pages/user/forgot-password",{
+    pageTitle: "Lấy lại mật khẩu"
+  })
+}
+
+// [POST]: /users/pasword/forgot
+export const forgotPasswordPost = async (req: Request, res: Response) => {
+  const user = await User.findOne({
+    email: req.body.email,
+    deleted: false
+  })
+  if(!user){
+    console.log("Email không tồn tại")
+  }
+  else{ 
+    // Create OTP 
+    const email = req.body.email
+    await ForgotPassword.deleteMany({email: email})
+    const otp = generateHelper.generateRandomNumber(6)
+    const objectForgotPassword = {
+      email: email,
+      otp: otp,
+      expiresAt: Date.now()
+
+    }
+    const forgotPassword = new ForgotPassword(objectForgotPassword)
+    await forgotPassword.save()
+    // Send OTP to user's gmail
+    const subject = `Mã OTP xác mình lấy lại mật khẩu`
+    const html = `Mã OTP xác mình lấy lại mật khẩu là <b>${otp}</b>. Thời hạn sử dụng là 3 phút. Lưu ý không được để lộ mã OTP`
+    sendMail(email,subject,html)
+    res.redirect(`/user/password/otp?email=${email}`)
+  }
 }
