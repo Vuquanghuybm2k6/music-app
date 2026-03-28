@@ -32,17 +32,14 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRoutes = void 0;
 const express_1 = require("express");
 const router = (0, express_1.Router)();
 const controller = __importStar(require("../../controllers/client/user.controller"));
-const multer_1 = __importDefault(require("multer"));
-const upload = (0, multer_1.default)();
-const uploadCloud = __importStar(require("../../middlewares/admin/uploadCloud"));
+const multer = require("multer");
+const upload = multer();
+const uploadCloud = require("../../middlewares/client/uploadCloud");
 router.get("/register", controller.register);
 router.post("/register", upload.single("avatar"), uploadCloud.upload, controller.registerPost);
 router.get("/login", controller.login);
