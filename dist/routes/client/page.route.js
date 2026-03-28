@@ -33,9 +33,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pageRoutes = void 0;
+exports.homeRoutes = void 0;
 const express_1 = require("express");
 const router = (0, express_1.Router)();
-const controller = __importStar(require("../../controllers/client/page.controller"));
+const controller = __importStar(require("../../controllers/client/home.controller"));
 router.get("/", controller.index);
-exports.pageRoutes = router;
+exports.homeRoutes = router;

@@ -1,7 +1,7 @@
 import {Router} from 'express'
 const router: Router = Router()
-import * as controller from "../../controllers/client/page.controller"
+import * as controller from "../../controllers/client/home.controller"
 
 router.get("/", controller.index)
 
-export const pageRoutes: Router = router 
+export const homeRoutes: Router = router 

@@ -10,6 +10,6 @@ const clientRoutes = (app) => {
     app.use("/songs", song_route_1.songRoutes);
     app.use("/favorite-songs", favorite_song_route_1.favoriteSongRoutes);
     app.use("/search", search_route_1.searchRoutes);
-    app.use("/", page_route_1.pageRoutes);
+    app.use("/", page_route_1.homeRoutes);
 };
 exports.default = clientRoutes;
