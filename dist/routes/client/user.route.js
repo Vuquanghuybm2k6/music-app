@@ -44,4 +44,5 @@ router.get("/register", controller.register);
 router.post("/register", upload.single("avatar"), uploadCloud.upload, controller.registerPost);
 router.get("/login", controller.login);
 router.post("/login", controller.loginPost);
+router.get("/logout", controller.logout);
 exports.userRoutes = router;
