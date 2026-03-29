@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+
+block main
+  h1= pageTitle
+  .card
+    .card-body
+      if singer.avatar
+        .mb-3
+          img(src=singer.avatar, alt=singer.name, width="200")
+      h2= singer.name
+      p
+        strong Slug: 
+        | #{singer.slug}
+      if singer.infoSinger
+        p
+          strong Ca sĩ: 
+          | #{singer.infoSinger.name}
+      p.mt-3
+        strong Ngày tạo:
+        | #{singer.createdAt}
+      a(
+        href=`${prefixAdmin}/singers/edit/${singer.id}` 
+        class = "btn btn-warning"
+        ) Chỉnh sửa
+
+      script(src = "/admin/js/singer.js")

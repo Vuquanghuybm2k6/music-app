@@ -50,3 +50,16 @@ export const createPost = async (req: Request, res: Response) => {
   console.log("Tạo ca sĩ thành công")
   return res.redirect("/admin/singers")
 }
+
+// [GET]: /admin/singers/detail/:id
+export const detail = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const singer = await Singer.findOne({
+    _id: id,
+    deleted: false
+  })
+  res.render("admin/pages/singers/detail",{
+    pageTitle: "Chi tiết ca sĩ",
+    singer
+  })
+}
