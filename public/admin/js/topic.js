@@ -3,7 +3,7 @@ const buttonsDelete = document.querySelectorAll("[button-delete]")
 if(buttonsDelete.length>0){
   buttonsDelete.forEach(button=>{
     button.addEventListener("click",()=>{
-      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này")
+      const isConfirm = confirm("Bạn có chắc muốn xóa chủ đềnày")
       if(isConfirm){
         const formDeleteItem = document.querySelector("#form-delete-topic")
         const id = button.getAttribute("data-id")
