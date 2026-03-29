@@ -33,4 +33,5 @@ router.patch(
   "/delete/:id",
   controller.deleteSong
   )
+router.get("/detail/:id", controller.detail)
 export const songRoutes: Router = router 

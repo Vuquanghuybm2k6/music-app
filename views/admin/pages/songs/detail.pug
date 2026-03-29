@@ -1,0 +1,50 @@
+extends ../../layouts/default.pug
+
+block main
+  h1= pageTitle
+  .card
+    .card-body
+      if song.avatar
+        .mb-3
+          img(src=song.avatar, alt=song.title, width="200")
+      h2= song.title
+      p
+        strong Slug: 
+        | #{song.slug}
+      if song.infoSinger
+        p
+          strong Ca sĩ: 
+          | #{song.infoSinger.name}
+      if song.topic
+        p
+          strong Chủ đề: 
+          | #{song.topic.title}
+      p
+        strong Lượt thích: 
+        | #{song.like}
+      p
+        strong Lượt nghe: 
+        | #{song.listen}
+      if song.description
+        .mt-3
+          strong Mô tả:
+          p= song.description
+      if song.audio
+        .mt-3
+          strong Nghe bài hát:
+          br
+          audio(controls)
+            source(src=song.audio)
+      if song.lyrics
+        .mt-3
+          strong Lời bài hát:
+          pre= song.lyrics
+      p.mt-3
+        strong Ngày tạo:
+        | #{song.createdAt}i
+      a(
+        href=`${prefixAdmin}/songs/edit/${song.id}` 
+        class = "btn btn-warning"
+        ) Chỉnh sửa
+
+      script(src = "/admin/js/song.js")

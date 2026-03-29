@@ -123,3 +123,29 @@ export const deleteSong = async (req: Request, res: Response) => {
   }
   res.redirect(req.get("Referer"))  
 }
+
+// [GET]: /admin/songs/detail/:id
+export const detail = async (req: Request, res: Response) => {  
+  const id = req.params.id
+  const song = await Song.findOne({
+    _id: id,
+    status: "active",
+    deleted: false
+  })
+  const topic = await Topic.findOne({
+    _id: song.topicId,
+    status: "active",
+    deleted: false
+  })
+  const infoSinger = await Singer.findOne({
+    _id: song.singerId,
+    status: "active",
+    deleted: false
+  })
+  song["infoSinger"] = infoSinger
+  song["topic"] = topic
+    res.render("admin/pages/songs/detail",{
+      pageTitle: "Chi tiết bài hát",
+      song
+    })
+}
