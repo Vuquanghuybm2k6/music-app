@@ -51,7 +51,7 @@ export const loginPost = async (req: Request, res: Response) => {
     if(md5(req.body.password) == user.password){
       console.log("Đăng nhập thành công")
       res.cookie("tokenUser", user.tokenUser)
-      res.redirect("/")
+      res.redirect("/topics")
     }
     else{
       console.log("Sai mật khẩu")

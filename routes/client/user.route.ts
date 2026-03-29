@@ -4,11 +4,14 @@ import * as controller from "../../controllers/client/user.controller"
 const multer = require("multer")
 const upload = multer()
 const uploadCloud = require("../../middlewares/client/uploadCloud")
+import {requireAuth} from "../../middlewares/client/requireAuth"
+
 router.get("/register", controller.register)
 router.post(
   "/register",
   upload.single("avatar"),
   uploadCloud.upload,
+  requireAuth,
   controller.registerPost)
 router.get("/login", controller.login)
 router.post("/login", controller.loginPost)
