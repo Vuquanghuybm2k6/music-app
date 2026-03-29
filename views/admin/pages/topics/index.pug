@@ -52,3 +52,9 @@ block main
                   a(class = "btn btn-secondary btn-sm mr-1" href =`${prefixAdmin}/topics/detail/${item.id}`) Chi tiết
                   a(class = "btn btn-warning btn-sm mr-1" href =`${prefixAdmin}/topics/edit/${item.id}`) Sửa
                   button(class = "btn btn-danger btn-sm" button-delete data-id = item.id) Xóa
+  form(
+    method = "POST"
+    action = ``
+    id = "form-delete-topic"
+    data-path = `/${prefixAdmin}/topics/delete`
+    )
