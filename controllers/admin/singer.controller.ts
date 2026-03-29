@@ -59,3 +59,34 @@ export const detail = async (req: Request, res: Response) => {
     singer
   })
 }
+
+// [GET]: /admin/singers/edit/:id
+export const edit = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const singer = await Singer.findOne({
+    _id: id,
+    deleted: false
+  })
+  res.render("admin/pages/singers/edit",{
+    pageTitle: "Chỉnh sửa ca sĩ",
+    singer
+  })
+}
+
+// [PATCH]: /admin/singers/edit/:id
+export const editPatch = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const singer = await Singer.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!singer){
+    console.log("Không tìm thấy ca sĩ")
+  } else {
+    await Singer.updateOne({
+      _id: id
+    }, req.body)
+    console.log("Cập nhật ca sĩ thành công")
+  }
+  res.redirect("/admin/singers")
+}
