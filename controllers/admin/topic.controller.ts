@@ -33,3 +33,11 @@ export const deleteTopic = async (req: Request, res: Response) => {
     return res.redirect("/admin/topics")
   }
 }
+
+// [GET]: /admin/topics/create
+export const create = async (req: Request, res: Response) => {
+  
+  res.render("admin/pages/topics/create",{
+    pageTitle: "Tạo mới chủ đề",
+  })
+}
