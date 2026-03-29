@@ -58,4 +58,10 @@ block main
     id = "form-delete-topic"
     data-path = `/${prefixAdmin}/topics/delete`
     )
+  form(
+      action = ``
+      method = "POST"
+      data-path = `/${prefixAdmin}/topics/change-status`
+      id = `form-change-status`
+    )
   script(src = "/admin/js/topic.js")

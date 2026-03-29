@@ -22,4 +22,5 @@ router.patch(
   uploadCloud.uploadSingle,
   controller.editPatch
 )
+router.patch("/change-status/:status/:id", controller.changeStatus)
 export const topicRoutes: Router = router 

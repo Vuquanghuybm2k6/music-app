@@ -58,4 +58,10 @@ block main
     id = "form-delete-singer"
     data-path = `/${prefixAdmin}/singers/delete`
     )
+  form(
+    action = ``
+    method = "POST"
+    data-path = `/${prefixAdmin}/singers/change-status`
+    id = `form-change-status`
+  )
   script(src = "/admin/js/singer.js")

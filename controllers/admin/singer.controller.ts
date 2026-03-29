@@ -90,3 +90,24 @@ export const editPatch = async (req: Request, res: Response) => {
   }
   res.redirect("/admin/singers")
 }
+
+// [PATCH]: /admin/singers/change-status/:status/:id
+export const changeStatus = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const status = req.params.status 
+  const singer = await Singer.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!singer){
+    console.log("Không tìm thấy ca sĩ")
+  } else {
+    await Singer.updateOne({
+      _id: id
+    }, {
+      status: status
+    })
+    console.log("Cập nhật trạng thái ca sĩ thành công")
+  } 
+  res.redirect("/admin/singers")
+}

@@ -149,3 +149,24 @@ export const detail = async (req: Request, res: Response) => {
       song
     })
 }
+
+// [PATCH]: /admin/songs/change-status/:status/:id
+export const changeStatus = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const status = req.params.status
+  const song = await Song.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!song){
+    console.log("Bài hát không tồn tại")
+  }
+  else{
+    await Song.updateOne({
+      _id: id
+    },{
+      status: status
+    })
+  }
+  res.redirect(req.get("Referer"))
+}

@@ -88,3 +88,25 @@ export const editPatch = async (req: Request, res: Response) => {
   console.log("Cập nhật chủ đề thành công")
   return res.redirect("/admin/topics")
 }
+
+// [PATCH]: /admin/topics/change-status/:status/:id
+export const changeStatus = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const status = req.params.status
+  const topic = await Topic.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!topic){
+    console.log("Không tìm thấy chủ đề")
+  }
+  else{
+    await Topic.updateOne({
+      _id: id
+    },{
+      status: status
+    })
+    console.log("Cập nhật trạng thái chủ đề thành công")
+  }
+  res.redirect("/admin/topics")
+}
