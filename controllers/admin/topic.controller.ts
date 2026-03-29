@@ -41,3 +41,11 @@ export const create = async (req: Request, res: Response) => {
     pageTitle: "Tạo mới chủ đề",
   })
 }
+
+// [POST]: /admin/topics/create
+export const createPost = async (req: Request, res: Response) => {
+  const topic = new Topic(req.body)
+  await topic.save()
+  console.log("Tạo chủ đề thành công")
+  return res.redirect("/admin/topics")
+}
