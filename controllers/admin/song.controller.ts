@@ -103,3 +103,23 @@ export const editPatch = async (req: Request, res: Response) => {
   }, dataSong)
   res.redirect(req.get("Referer"))
 }
+
+// [PATCH]: /admin/songs/delete/:id
+export const deleteSong = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const song = await Song.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!song){
+    console.log("Bài hát không tồn tại")
+  }
+  else{
+    await Song.updateOne({
+      _id: id
+    },{
+      deleted: true
+    })
+  }
+  res.redirect(req.get("Referer"))  
+}
