@@ -49,3 +49,17 @@ export const createPost = async (req: Request, res: Response) => {
   console.log("Tạo chủ đề thành công")
   return res.redirect("/admin/topics")
 }
+
+// [GET]: /admin/topics/detail/:id
+export const detail = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const topic = await Topic.findOne({
+    _id: id,
+    deleted: false
+  })
+  res.render("admin/pages/topics/detail",{
+    pageTitle: "Chi tiết chủ đề",
+    topic
+  })
+  
+}
