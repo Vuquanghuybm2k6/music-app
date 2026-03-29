@@ -63,3 +63,28 @@ export const detail = async (req: Request, res: Response) => {
   })
   
 }
+
+// [GET]: /admin/topics/edit/:id
+export const edit = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const topic = await Topic.findOne({
+    _id: id,
+    deleted: false
+  })
+  res.render("admin/pages/topics/edit",{
+    pageTitle: "Chỉnh sửa chủ đề",
+    topic
+  })
+}
+
+// [PATCH]: /admin/topics/edit/:id
+export const editPatch = async (req: Request, res: Response) => {
+  const id = req.params.id
+  await Topic.updateOne({
+    _id: id
+  }, {
+    ...req.body
+  })
+  console.log("Cập nhật chủ đề thành công")
+  return res.redirect("/admin/topics")
+}
