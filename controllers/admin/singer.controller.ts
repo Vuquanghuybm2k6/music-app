@@ -35,3 +35,18 @@ export const deleteSinger = async (req: Request, res: Response) => {
   }
   res.redirect("/admin/singers")
 }
+
+// [GET]: /admin/singers/create
+export const create = async (req: Request, res: Response) => {
+  res.render("admin/pages/singers/create",{
+    pageTitle: "Tạo mới ca sĩ"
+  })
+}
+
+// [POST]: /admin/singers/create
+export const createPost = async (req: Request, res: Response) => {
+  const singer = new Singer(req.body)
+  await singer.save()
+  console.log("Tạo ca sĩ thành công")
+  return res.redirect("/admin/singers")
+}
