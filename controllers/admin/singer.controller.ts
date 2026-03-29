@@ -111,3 +111,36 @@ export const changeStatus = async (req: Request, res: Response) => {
   } 
   res.redirect("/admin/singers")
 }
+
+// [PATCH]: /admin/singers/change-multi
+export const changeMulti = async (req: Request, res: Response) => {
+  const ids = req.body.ids.split(", ")
+  const type = req.body.type
+  switch(type){
+    case "active":
+      await Singer.updateMany({
+        _id: {$in: ids}
+      },{
+        $set: {status: "active"}
+      })
+      break
+    case "inactive":
+      await Singer.updateMany({
+        _id: {$in:ids}
+      },{
+        $set: {status: "inactive"}
+      })
+      break
+    case "delete-all":
+      await Singer.updateMany({
+        _id: {$in: ids}
+      },{
+        $set:{deleted:true}
+      })
+     break
+     default:
+      break
+  }
+  console.log("Thay đổi thành công")
+  res.redirect(req.get("Referer"))
+}

@@ -23,4 +23,6 @@ router.patch(
   controller.editPatch
 )
 router.patch("/change-status/:status/:id", controller.changeStatus)
+router.patch("/change-multi", controller.changeMulti)
+
 export const singerRoutes: Router = router 

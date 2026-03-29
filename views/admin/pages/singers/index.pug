@@ -1,4 +1,6 @@
 extends ../../layouts/default.pug
+include ../../mixins/form-change-multi.pug
+
 block main 
   h2(class ="mb-4") #{pageTitle}
 
@@ -7,6 +9,7 @@ block main
     .card-body 
       .row 
         .col-8 
+          +form-change-multi(`/${prefixAdmin}/singers/change-multi?_method=PATCH`)
         .col-4.text-right 
           a(
             href = `/${prefixAdmin}/singers/create`

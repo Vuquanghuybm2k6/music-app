@@ -35,4 +35,5 @@ router.patch(
   )
 router.get("/detail/:id", controller.detail)
 router.patch("/change-status/:status/:id", controller.changeStatus)
+router.patch("/change-multi", controller.changeMulti)
 export const songRoutes: Router = router 
