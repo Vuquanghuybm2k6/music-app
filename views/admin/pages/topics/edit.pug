@@ -4,7 +4,7 @@ block main
   h1(class="mb-4") #{pageTitle}
 
   form(
-    action=`/${prefixAdmin}/topics/edit/${topic.id}?_method=PATCH`
+    action=`${prefixAdmin}/topics/edit/${topic.id}?_method=PATCH`
     method="POST"
     enctype="multipart/form-data"
   )
@@ -19,35 +19,6 @@ block main
         value=topic.title
       )
 
-    //- div(class="form-group")
-    //-   label(for="topic") Chủ đề
-    //-   select(
-    //-     name="topicId"
-    //-     id="topic"
-    //-     class="form-control"
-    //-     value = topic.topicId
-    //-   )
-        //- option(value="" disabled) -- Chọn chủ đề --
-        //- each item in topics
-        //-   option(
-        //-     value=item.id
-        //-     selected=(item.id == song.topicId)
-        //-   ) #{item.title}
-
-    //- div(class="form-group")
-    //-   label(for="singer") Ca sĩ
-    //-   select(
-    //-     name="singerId"
-    //-     id="singer"
-    //-     class="form-control"
-    //-     required
-    //-   )
-    //-     option(value="" disabled) -- Chọn ca sĩ --
-    //-     each item in singers
-    //-       option(
-    //-         value=item.id
-    //-         selected=(item.id == song.singerId)
-    //-       ) #{item.fullName}
 
     div(class="form-group" upload-image)
       label(for="thumbnail") Ảnh
@@ -64,27 +35,6 @@ block main
         upload-image-preview
       )
 
-    //- div(class="form-group" upload-audio)
-    //-   label(for="audio") File âm thanh
-    //-   input(
-    //-     type="file"
-    //-     class="form-control-file"
-    //-     id="audio"
-    //-     name="audio"
-    //-     accept="audio/*"
-    //-     upload-audio-input
-    //-   )
-    //-   audio(controls upload-audio-play)
-    //-     source(src = topic.audio)
-
-    //- div(class="form-group")
-    //-   label(for="lyrics") Lời bài hát
-    //-   textarea(
-    //-     id="lyrics"
-    //-     name="lyrics"
-    //-     class="form-control"
-    //-     rows="20"
-    //-   ) #{song.lyrics}
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(
