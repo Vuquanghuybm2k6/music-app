@@ -89,3 +89,29 @@ export const editPatch = async (req: Request, res: Response) => {
     res.redirect("/admin/roles") 
   }
 }
+
+// [GET]: /admin/roles/permissions
+export const permissions = async (req: Request, res: Response) => {
+  const roles = await Role.find({
+  deleted: false
+})
+  res.render("admin/pages/roles/permissions",{
+    pageTitle: "Phân quyền",
+    records: roles
+  })
+}
+
+// [PATCH]: /admin/roles/permissions
+export const permissionsPatch = async (req: Request, res: Response) => {
+  const permissions = JSON.parse(req.body.permissions)
+  for(const item of permissions){
+    await Role.updateOne({
+      _id: item._id
+    },{
+      permissions: item.permissions
+    })
+  }
+  console.log("Cập nhật quyền thành công")
+  res.redirect("/admin/roles/permissions")
+  console.log(permissions)
+}
