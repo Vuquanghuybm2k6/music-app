@@ -31,3 +31,26 @@ export const createPost = async (req: Request, res: Response) => {
     res.status(500).send("Đã xảy ra lỗi khi tạo mới nhóm quyền")
   }
 }
+
+// [PATCH]: /admin/roles/delete/:id
+export const deleteRole = async (req: Request, res: Response) => {
+
+    const id = req.params.id
+    const role = await Role.findOne({
+      _id: id,
+      deleted: false
+    })
+    if(!role){
+      console.log("Không tìm thấy nhóm quyền")
+    }
+    else{
+      await Role.updateOne({
+        _id: id
+      },{
+        deleted: true
+      })
+      console.log("Xóa nhóm quyền thành công")
+      res.redirect("/admin/roles")
+    }
+ 
+}
