@@ -6,5 +6,7 @@ router.get("/", controller.index)
 router.get("/create", controller.create)
 router.post("/create", controller.createPost)
 router.patch("/delete/:id", controller.deleteRole)
+router.get("/edit/:id", controller.edit)
+router.patch("/edit/:id", controller.editPatch)
 
 export const roleRoutes: Router = router 

@@ -54,3 +54,38 @@ export const deleteRole = async (req: Request, res: Response) => {
     }
  
 }
+
+// [PATCH]: /admin/roles/edit/:id
+export const edit = async (req: Request, res: Response) => {
+
+    const id = req.params.id
+    const role = await Role.findOne({
+      _id: id,
+      deleted: false
+    })
+    res.render("admin/pages/roles/edit",{
+      pageTitle: "Chỉnh sửa nhóm quyền",
+      data: role
+    })
+ 
+}
+
+// [PATCH]: /admin/roles/edit/:id
+export const editPatch = async (req: Request, res: Response) => {
+    
+  const id = req.params.id
+  const role = await Role.findOne({
+    _id: id})
+  if(!role){
+    console.log("Không tìm thấy nhóm quyền")
+  }
+  else{
+    await Role.updateOne({
+      _id: id
+    },{
+      ...req.body
+    })
+    console.log("Cập nhật nhóm quyền thành công")
+    res.redirect("/admin/roles") 
+  }
+}
