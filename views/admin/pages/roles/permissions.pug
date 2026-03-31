@@ -19,51 +19,75 @@ block main
           each item in records
             td(class = "text-center")
               input(type="text" value=item.id)
-        //- Danh mục sản phẩm
+        //- Chủ đề
         tr 
           td(colspan = "4")
-            b Danh mục sản phẩm 
-        tr(data-name="products-category_view") 
+            b Chủ đề
+        tr(data-name="topics_view") 
           td Xem 
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
-        tr(data-name="products-category_create") 
+        tr(data-name="topics_create") 
           td Thêm mới 
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
-        tr(data-name="products-category_edit") 
+        tr(data-name="topics_edit") 
           td Chỉnh sửa 
           each item in records
               td(class = "text-center") 
                 input(type ="checkbox")
-        tr(data-name="products-category_delete") 
+        tr(data-name="topics_delete") 
           td Xóa 
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
 
-        //- Sản phẩm
+        //- Bài hát
         tr 
           td(colspan = "4")
-            b Sản phẩm
-        tr(data-name="products_view") 
+            b Bài hát
+        tr(data-name="songs_view") 
           td Xem 
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
-        tr(data-name="products_create") 
+        tr(data-name="songs_create") 
           td Thêm mới 
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
-        tr(data-name="products_edit") 
+        tr(data-name="songs_edit") 
           td Chỉnh sửa 
           each item in records
               td(class = "text-center") 
                 input(type ="checkbox")
-        tr(data-name="products_delete") 
+        tr(data-name="songs_delete") 
+          td Xóa 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
+        //- Ca sĩ
+        tr 
+          td(colspan = "4")
+            b Ca sĩ
+        tr(data-name="singers_view") 
+          td Xem 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
+        tr(data-name="singers_create") 
+          td Thêm mới 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
+        tr(data-name="singers_edit") 
+          td Chỉnh sửa 
+          each item in records
+              td(class = "text-center") 
+                input(type ="checkbox")
+        tr(data-name="singers_delete") 
           td Xóa 
           each item in records
             td(class = "text-center") 
@@ -97,10 +121,10 @@ block main
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
-        //-Tài khoản
+        //-Tài khoản admin
         tr 
           td(colspan = "4")
-            b Danh sách tài khoản
+            b Danh sách tài khoản admin
         tr(data-name="accounts_view") 
           td Xem 
           each item in records
@@ -121,10 +145,35 @@ block main
           each item in records
             td(class = "text-center") 
               input(type ="checkbox")
+        //-Tài khoản user
+        tr 
+          td(colspan = "4")
+            b Danh sách tài khoản user
+        tr(data-name="users_view") 
+          td Xem 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
+        tr(data-name="users_create") 
+          td Thêm mới 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
+        tr(data-name="users_edit") 
+          td Chỉnh sửa 
+          each item in records
+              td(class = "text-center") 
+                input(type ="checkbox")
+        tr(data-name="users_delete") 
+          td Xóa 
+          each item in records
+            td(class = "text-center") 
+              input(type ="checkbox")
     form(
       id = "form-change-permissions" 
       method ="POST" 
       action = `${prefixAdmin}/roles/permissions?_method=PATCH` 
+      class = "d-none"
       )
       div(class = "form-group")
         input(

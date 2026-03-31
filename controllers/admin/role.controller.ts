@@ -103,15 +103,21 @@ export const permissions = async (req: Request, res: Response) => {
 
 // [PATCH]: /admin/roles/permissions
 export const permissionsPatch = async (req: Request, res: Response) => {
-  const permissions = JSON.parse(req.body.permissions)
-  for(const item of permissions){
-    await Role.updateOne({
-      _id: item._id
-    },{
-      permissions: item.permissions
-    })
+  try{
+    const permissions = JSON.parse(req.body.permissions)
+    for(const item of permissions){
+      await Role.updateOne({
+        _id: item.id
+      },{
+        permissions: item.permissions
+      })
+    }
+    console.log("Cập nhật quyền thành công")
+    res.redirect("/admin/roles/permissions")
+    console.log(permissions)
   }
-  console.log("Cập nhật quyền thành công")
-  res.redirect("/admin/roles/permissions")
-  console.log(permissions)
+  catch(error){
+    console.error("Lỗi khi cập nhật quyền:", error)
+    res.status(500).send("Đã xảy ra lỗi khi cập nhật quyền")
+  }
 }
