@@ -29,6 +29,9 @@ export const index = async (req: Request, res: Response) => {
       record.role = role
     }
   }
+  for(const record of records){
+    console.log(record._id)
+  }
 
   res.render("admin/pages/accounts/index", {
     pageTitle: "Danh sách tài khoản",
@@ -75,4 +78,58 @@ export const createPost = async (req: Request, res: Response) => {
     res.redirect(`${systemConfig.prefixAdmin}/accounts`)
     console.log("Tạo tài khoản thành công")
   }
+}
+
+// [GET]: /admin/accounts/edit
+export const edit = async (req, res) => {
+  try {
+    const id = req.params.id
+    const account = await Account.findOne({
+      _id: id,
+      deleted: false
+    }).select("-password -token")
+    const roles = await Role.find({
+      deleted: false
+    })
+    res.render("admin/pages/accounts/edit", {
+      pageTitle: "Chỉnh sửa tài khoản",
+      account: account,
+      roles: roles
+    })
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/accounts`)
+  }
+}
+// [PATCH]: /admin/accounts/edit
+export const editPatch = async (req, res) => {
+  const id = req.params.id
+  const emailExit = await Account.findOne({
+    _id: {
+      $ne: id
+    }, 
+    email: req.body.email,
+    deleted: false
+  })
+  if (emailExit) {
+    console.log("Email đã tồn tại")
+  } else {
+    if (req.body.password) {
+      req.body.password = md5(req.body.password)
+    } else {
+      delete req.body.password
+    }
+    let avatar = ""
+    if(req.body.avatar){
+      avatar = req.body.avatar[0]
+    }
+    // Avatar is an array, but in mongoDB, avatar is a string, we need to convert it to string before save to mongoDB
+    await Account.updateOne({
+      _id: id
+    }, {
+      ...req.body,
+      avatar: avatar
+    })
+    console.log("Cập nhật tài khoản thành công")  
+  }
+  res.redirect(req.get("Referer"))
 }
