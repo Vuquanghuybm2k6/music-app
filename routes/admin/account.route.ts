@@ -1,7 +1,17 @@
 import {Router} from 'express'
 const router: Router = Router()
 import * as controller from "../../controllers/admin/account.controller"
-
+import * as uploadCloud from '../../middlewares/admin/uploadCloud'
+import multer from "multer"
+const upload = multer()
 router.get("/", controller.index)
+router.get("/create", controller.create)
+router.post(
+  "/create",
+  upload.fields([
+    { name: 'avatar', maxCount: 1 }
+    ]),
+  uploadCloud.uploadFields,
+  controller.createPost)
 
 export const accountRoutes: Router = router 
