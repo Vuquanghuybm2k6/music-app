@@ -21,4 +21,5 @@ router.patch(
   controller.editPatch)
 router.patch("/delete/:id", controller.deleteAccount)
 router.get("/detail/:id", controller.detail)
+router.patch("/change-status/:status/:id", controller.changeStatus)
 export const accountRoutes: Router = router 

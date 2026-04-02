@@ -176,3 +176,24 @@ export const detail = async (req, res) => {
     res.redirect(`${systemConfig.prefixAdmin}/accounts`)
   }
 }
+
+// [PATCH]: /admin/accounts/change-status/:status/:id
+export const changeStatus = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const status = req.params.status 
+  const account = await Account.findOne({
+    _id: id,
+    deleted: false
+  })
+  if(!account){
+    console.log("Không tìm thấy tài khoản")
+  } else {
+    await Account.updateOne({
+      _id: id
+    }, {
+      status: status
+    })
+    console.log("Cập nhật trạng thái tài khoản thành công")
+  } 
+  res.redirect("/admin/accounts")
+}
