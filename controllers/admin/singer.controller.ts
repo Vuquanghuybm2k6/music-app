@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import mongoose from "mongoose"
 import Singer from "../../models/singer.model"
 import paginationHelper from "../../helpers/pagination"
 import searchHelper from "../../helpers/search"
@@ -159,5 +160,5 @@ export const changeMulti = async (req: Request, res: Response) => {
       break
   }
   console.log("Thay đổi thành công")
-  res.redirect(req.get("Referer"))
+  res.redirect("/admin/singers")
 }

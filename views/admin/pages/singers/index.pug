@@ -10,7 +10,7 @@ block main
     .card-body 
       .row 
         .col-4
-          +form-change-multi(`/${prefixAdmin}/singers/change-multi?_method=PATCH`)
+          +form-change-multi(`${prefixAdmin}/singers/change-multi?_method=PATCH`)
         .col-4 
           +search(keyword)
         .col-4.text-right 
