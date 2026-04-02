@@ -4,11 +4,19 @@ import Account from "../../models/account.model"
 import md5 from "md5"
 import {systemConfig} from "../../config/config"
 import paginationHelper from "../../helpers/pagination"
+import searchHelper from "../../helpers/search"
 // [GET]: /admin/accounts
 export const index = async (req: Request, res: Response) => {
-  const find = {
-    deleted: false
-  }
+  const find : {
+      deleted: boolean,
+      fullName?: RegExp
+    } = {
+      deleted: false,
+    }
+    if(req.query.keyword){
+      const regex = searchHelper(req.query) 
+      find.fullName = regex
+    }
   interface AccountLean {
     _id: string
     role_id: string

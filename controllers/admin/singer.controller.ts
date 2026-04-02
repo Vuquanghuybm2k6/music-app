@@ -1,11 +1,19 @@
 import { Request, Response } from "express"
 import Singer from "../../models/singer.model"
 import paginationHelper from "../../helpers/pagination"
+import searchHelper from "../../helpers/search"
 // [GET]: /admin/singers
 export const index = async (req: Request, res: Response) => {
-  const find = {
-    deleted: false
-  }
+  const find : {
+      deleted: boolean,
+      fullName?: RegExp
+    } = {
+      deleted: false,
+    }
+    if(req.query.keyword){
+      const regex = searchHelper(req.query) 
+      find.fullName = regex
+    }
   const pagination = {
     limitItem: 4,
     currentPage: 1, 

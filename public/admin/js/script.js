@@ -125,3 +125,21 @@ if (buttonsPagination.length > 0) {
   })
 }
 // End Pagination
+
+// Form Search
+const formSearch = document.querySelector("#form-search")
+if (formSearch) {
+  formSearch.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const url = new URL(window.location.href)
+    const keyword = e.target.elements.keyword.value
+    if (keyword) {
+      url.searchParams.set("keyword", keyword)
+    } else {
+      url.searchParams.delete("keyword")
+    }
+    window.location.href = url.href
+
+  })
+}
+// End Form Search

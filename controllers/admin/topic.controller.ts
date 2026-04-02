@@ -1,11 +1,18 @@
 import { Request, Response } from "express"
 import Topic from "../../models/topic.model"
 import paginationHelper from "../../helpers/pagination"
-
+import searchHelper from "../../helpers/search"
 // [GET]: /admin/topics
 export const index = async (req: Request, res: Response) => {
-  const find = {
-    deleted: false
+  const find : {
+    deleted: boolean,
+    title?: RegExp
+  } = {
+    deleted: false,
+  }
+  if(req.query.keyword){
+    const regex = searchHelper(req.query) 
+    find.title = regex
   }
   const pagination = {
     limitItem: 4,
@@ -18,7 +25,8 @@ export const index = async (req: Request, res: Response) => {
   res.render("admin/pages/topics/index",{
     pageTitle: "Quản lí chủ đề",
     topics,
-    pagination: pagination
+    pagination,
+    keyword: req.query.keyword,
   })
 }
 

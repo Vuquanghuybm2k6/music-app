@@ -4,10 +4,18 @@ import Topic from "../../models/topic.model"
 import Singer from "../../models/singer.model"
 import { systemConfig } from "../../config/config"
 import paginationHelper from "../../helpers/pagination"
+import searchHelper from "../../helpers/search"
 // [GET]: /admin/songs
 export const index = async (req: Request, res: Response) => {
-  const find = {
-    deleted: false
+  const find : {
+    deleted: boolean,
+    title?: RegExp
+  } = {
+    deleted: false,
+  }
+  if(req.query.keyword){
+    const regex = searchHelper(req.query) 
+    find.title = regex
   }
   const pagination = {
     limitItem: 4,
@@ -16,9 +24,7 @@ export const index = async (req: Request, res: Response) => {
   }
   const totalItems = await Song.countDocuments(find)
   paginationHelper(req.query, totalItems, pagination)
-  const songs = await Song.find({
-    deleted: false
-  }).skip(pagination.skip).limit(pagination.limitItem)
+  const songs = await Song.find(find).skip(pagination.skip).limit(pagination.limitItem)
   res.render("admin/pages/songs/index",{
     pageTitle: "Danh sách bài hát",
     songs,

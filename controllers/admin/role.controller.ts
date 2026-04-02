@@ -1,11 +1,19 @@
 import { Request, Response } from "express"
 import Role from "../../models/role.model"
 import paginationHelper from "../../helpers/pagination"
+import searchHelper from "../../helpers/search"
 // [GET]: /admin/roles
 export const index = async (req: Request, res: Response) => {
-  const find = {
-    deleted: false
-  }
+  const find : {
+      deleted: boolean,
+      title?: RegExp
+    } = {
+      deleted: false,
+    }
+    if(req.query.keyword){
+      const regex = searchHelper(req.query) 
+      find.title = regex
+    }
   const pagination = {
     limitItem: 4,
     currentPage: 1, 
@@ -13,9 +21,7 @@ export const index = async (req: Request, res: Response) => {
   }
   const totalItems = await Role.countDocuments(find)
   paginationHelper(req.query, totalItems, pagination)
-  const role = await Role.find({
-    deleted: false
-  })
+  const role = await Role.find(find).skip(pagination.skip).limit(pagination.limitItem)
   res.render("admin/pages/roles/index",{
     pageTitle: "Nhóm quyền",
     records: role,
