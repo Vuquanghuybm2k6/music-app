@@ -1,14 +1,25 @@
 import { Request, Response } from "express"
 import Role from "../../models/role.model"
-
+import paginationHelper from "../../helpers/pagination"
 // [GET]: /admin/roles
 export const index = async (req: Request, res: Response) => {
+  const find = {
+    deleted: false
+  }
+  const pagination = {
+    limitItem: 4,
+    currentPage: 1, 
+    skip: 1
+  }
+  const totalItems = await Role.countDocuments(find)
+  paginationHelper(req.query, totalItems, pagination)
   const role = await Role.find({
     deleted: false
   })
   res.render("admin/pages/roles/index",{
     pageTitle: "Nhóm quyền",
-    records: role
+    records: role,
+    pagination
   })
 }
 

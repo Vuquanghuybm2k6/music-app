@@ -3,6 +3,7 @@ import Role from "../../models/role.model"
 import Account from "../../models/account.model"
 import md5 from "md5"
 import {systemConfig} from "../../config/config"
+import paginationHelper from "../../helpers/pagination"
 // [GET]: /admin/accounts
 export const index = async (req: Request, res: Response) => {
   const find = {
@@ -13,6 +14,13 @@ export const index = async (req: Request, res: Response) => {
     role_id: string
     [key: string]: any
   }
+  const pagination = {
+    limitItem: 4,
+    currentPage: 1, 
+    skip: 1
+  }
+  const totalItems = await Account.countDocuments(find)
+  paginationHelper(req.query, totalItems, pagination)
   const records = await Account
     .find(find)
     .select("-password -token")
@@ -35,7 +43,8 @@ export const index = async (req: Request, res: Response) => {
 
   res.render("admin/pages/accounts/index", {
     pageTitle: "Danh sách tài khoản",
-    records: records
+    records: records,
+    pagination
   })
 }
 
@@ -49,6 +58,7 @@ export const create = async (req: Request, res: Response) => {
     roles: roles
   })
 }
+
 // [POST]: /admin/accounts/create
 export const createPost = async (req: Request, res: Response) => {
   const emailExit = await Account.findOne({

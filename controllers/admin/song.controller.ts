@@ -3,15 +3,26 @@ import Song from "../../models/song.model"
 import Topic from "../../models/topic.model"
 import Singer from "../../models/singer.model"
 import { systemConfig } from "../../config/config"
-
+import paginationHelper from "../../helpers/pagination"
 // [GET]: /admin/songs
 export const index = async (req: Request, res: Response) => {
+  const find = {
+    deleted: false
+  }
+  const pagination = {
+    limitItem: 4,
+    currentPage: 1, 
+    skip: 1
+  }
+  const totalItems = await Song.countDocuments(find)
+  paginationHelper(req.query, totalItems, pagination)
   const songs = await Song.find({
     deleted: false
-  })
+  }).skip(pagination.skip).limit(pagination.limitItem)
   res.render("admin/pages/songs/index",{
     pageTitle: "Danh sách bài hát",
-    songs
+    songs,
+    pagination
   })
 }
 

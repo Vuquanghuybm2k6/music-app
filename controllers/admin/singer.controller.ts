@@ -1,14 +1,23 @@
 import { Request, Response } from "express"
 import Singer from "../../models/singer.model"
-
+import paginationHelper from "../../helpers/pagination"
 // [GET]: /admin/singers
 export const index = async (req: Request, res: Response) => {
-  const singers = await Singer.find({
+  const find = {
     deleted: false
-  })
+  }
+  const pagination = {
+    limitItem: 4,
+    currentPage: 1, 
+    skip: 1
+  }
+  const totalItems = await Singer.countDocuments(find)
+  paginationHelper(req.query, totalItems, pagination)
+  const singers = await Singer.find(find).skip(pagination.skip).limit(pagination.limitItem)
   res.render("admin/pages/singers/index",{
     pageTitle: "Danh sách ca sĩ",
-    singers
+    singers,
+    pagination
   })
 }
 

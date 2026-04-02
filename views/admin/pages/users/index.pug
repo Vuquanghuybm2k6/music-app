@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/pagination.pug
 block main 
   h1(class ="mb-4") Danh sách tài khoản
   .card.mb-3 
@@ -42,6 +43,7 @@ block main
                     data-id = item._id
                     button-change-status
                   ) Dừng hoạt động
+    +pagination(pagination)
   form(
     action = ``
     method = "POST"

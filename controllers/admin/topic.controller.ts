@@ -1,14 +1,24 @@
 import { Request, Response } from "express"
 import Topic from "../../models/topic.model"
+import paginationHelper from "../../helpers/pagination"
 
 // [GET]: /admin/topics
 export const index = async (req: Request, res: Response) => {
-  const topics = await Topic.find({
+  const find = {
     deleted: false
-  })
+  }
+  const pagination = {
+    limitItem: 4,
+    currentPage: 1, 
+    skip: 1
+  }
+  const totalItems = await Topic.countDocuments(find)
+  paginationHelper(req.query, totalItems, pagination)
+  const topics = await Topic.find(find).skip(pagination.skip).limit(pagination.limitItem)
   res.render("admin/pages/topics/index",{
     pageTitle: "Quản lí chủ đề",
-    topics
+    topics,
+    pagination: pagination
   })
 }
 
