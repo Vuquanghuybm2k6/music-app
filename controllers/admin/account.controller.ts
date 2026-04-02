@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import Role from "../../models/role.model"
 import Account from "../../models/account.model"
 import md5 from "md5"
-import {systemConfig} from "../../config/config"
+import {systemConfig} from "../../config/system"
 import paginationHelper from "../../helpers/pagination"
 import searchHelper from "../../helpers/search"
 // [GET]: /admin/accounts

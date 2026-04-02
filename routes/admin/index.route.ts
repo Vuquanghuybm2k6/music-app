@@ -1,7 +1,7 @@
 import {Express} from "express"
 
 import {dashboardRoutes} from "./dashboard.route"
-import { systemConfig } from "../../config/config"
+import { systemConfig } from "../../config/system"
 import { topicRoutes } from "./topic.route"
 import { songRoutes } from "./song.route"
 import { uploadRoutes } from "./upload.route"
@@ -10,6 +10,7 @@ import { roleRoutes } from "./role.route"
 import { accountRoutes } from "./account.route"
 import { userRoutes } from "./users.route"
 import { settingRoutes } from "./setting.route"
+import { authRoutes } from "./auth.route"
 const adminRoutes = (app: Express):void =>{
   const PATH_ADMIN =   `${systemConfig.prefixAdmin}`
   app.use(`${PATH_ADMIN}/dashboard`, dashboardRoutes)
@@ -21,6 +22,7 @@ const adminRoutes = (app: Express):void =>{
   app.use(`${PATH_ADMIN}/accounts`, accountRoutes)
   app.use(`${PATH_ADMIN}/users`, userRoutes)
   app.use(`${PATH_ADMIN}/settings`, settingRoutes)
+  app.use(`${PATH_ADMIN}/auth`, authRoutes)
 
 }
 export default adminRoutes

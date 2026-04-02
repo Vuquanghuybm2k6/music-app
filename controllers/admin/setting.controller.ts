@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import SettingGeneral from "../../models/settings-general.model"
-import { systemConfig } from "../../config/config"
+import { systemConfig } from "../../config/system"
 
 // [GET]: /admin/settings/general
 export const general = async (req: Request, res: Response) => {

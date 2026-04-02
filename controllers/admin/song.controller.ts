@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import Song from "../../models/song.model"
 import Topic from "../../models/topic.model"
 import Singer from "../../models/singer.model"
-import { systemConfig } from "../../config/config"
+import { systemConfig } from "../../config/system"
 import paginationHelper from "../../helpers/pagination"
 import searchHelper from "../../helpers/search"
 // [GET]: /admin/songs

@@ -13,7 +13,7 @@ app.use(express.static(`${__dirname}/public`))
 app.set("views", `${__dirname}/views`)
 app.set("view engine", "pug")
 
-import { systemConfig } from "./config/config";
+import { systemConfig } from "./config/system";
 app.locals.prefixAdmin = systemConfig.prefixAdmin
 
 // Tiny MCE

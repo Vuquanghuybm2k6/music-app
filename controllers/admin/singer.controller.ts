@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import Singer from "../../models/singer.model"
 import paginationHelper from "../../helpers/pagination"
 import searchHelper from "../../helpers/search"
-import { systemConfig } from "../../config/config"
+import { systemConfig } from "../../config/system"
 // [GET]: /admin/singers
 export const index = async (req: Request, res: Response) => {
   const find : {
