@@ -101,7 +101,7 @@ export const edit = async (req: Request, res: Response) => {
 // [PATCH]: /admin/songs/edit/:id
 export const editPatch = async (req: Request, res: Response) => {
   const id = req.params.id
-  const dataSong = {
+  const dataSong:any = {
   title: req.body.title,
   topicId: req.body.topicId,
   singerId: req.body.singerId,
@@ -118,7 +118,7 @@ export const editPatch = async (req: Request, res: Response) => {
   await Song.updateOne({
     _id: id
   }, dataSong)
-  res.redirect(req.get("Referer"))
+  res.redirect(`${systemConfig.prefixAdmin}/songs`)
 }
 
 // [PATCH]: /admin/songs/delete/:id
@@ -138,13 +138,13 @@ export const deleteSong = async (req: Request, res: Response) => {
       deleted: true
     })
   }
-  res.redirect(req.get("Referer"))  
+  res.redirect(`${systemConfig.prefixAdmin}/songs`)
 }
 
 // [GET]: /admin/songs/detail/:id
 export const detail = async (req: Request, res: Response) => {  
   const id = req.params.id
-  const song = await Song.findOne({
+  const song:any = await Song.findOne({
     _id: id,
     status: "active",
     deleted: false
@@ -185,7 +185,7 @@ export const changeStatus = async (req: Request, res: Response) => {
       status: status
     })
   }
-  res.redirect(req.get("Referer"))
+  res.redirect(`${systemConfig.prefixAdmin}/songs`)
 }
 
 // [PATCH]: /admin/songs/change-multi
@@ -218,5 +218,5 @@ export const changeMulti = async (req: Request, res: Response) => {
       break
   }
   console.log("Thay đổi thành công")
-  res.redirect(req.get("Referer"))
+  res.redirect(`${systemConfig.prefixAdmin}/songs`)
 }

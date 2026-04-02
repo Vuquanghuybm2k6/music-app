@@ -1,8 +1,8 @@
 import { Request, Response } from "express"
-import mongoose from "mongoose"
 import Singer from "../../models/singer.model"
 import paginationHelper from "../../helpers/pagination"
 import searchHelper from "../../helpers/search"
+import { systemConfig } from "../../config/config"
 // [GET]: /admin/singers
 export const index = async (req: Request, res: Response) => {
   const find : {
@@ -47,7 +47,7 @@ export const deleteSinger = async (req: Request, res: Response) => {
     })
     console.log("Xóa ca sĩ thành công")
   }
-  res.redirect("/admin/singers")
+  res.redirect(`${systemConfig.prefixAdmin}/singers`)
 }
 
 // [GET]: /admin/singers/create
@@ -62,7 +62,7 @@ export const createPost = async (req: Request, res: Response) => {
   const singer = new Singer(req.body)
   await singer.save()
   console.log("Tạo ca sĩ thành công")
-  return res.redirect("/admin/singers")
+  return res.redirect(`${systemConfig.prefixAdmin}/singers`)
 }
 
 // [GET]: /admin/singers/detail/:id
@@ -106,7 +106,7 @@ export const editPatch = async (req: Request, res: Response) => {
     }, req.body)
     console.log("Cập nhật ca sĩ thành công")
   }
-  res.redirect("/admin/singers")
+  res.redirect(`${systemConfig.prefixAdmin}/singers`)
 }
 
 // [PATCH]: /admin/singers/change-status/:status/:id
@@ -127,7 +127,7 @@ export const changeStatus = async (req: Request, res: Response) => {
     })
     console.log("Cập nhật trạng thái ca sĩ thành công")
   } 
-  res.redirect("/admin/singers")
+  res.redirect(`${systemConfig.prefixAdmin}/singers`)
 }
 
 // [PATCH]: /admin/singers/change-multi
@@ -160,5 +160,5 @@ export const changeMulti = async (req: Request, res: Response) => {
       break
   }
   console.log("Thay đổi thành công")
-  res.redirect("/admin/singers")
+  res.redirect(`${systemConfig.prefixAdmin}/singers`)
 }

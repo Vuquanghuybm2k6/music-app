@@ -75,7 +75,7 @@ export const createPost = async (req: Request, res: Response) => {
   })
   if (emailExit) {
     console.log("Email đã tồn tại")
-    res.redirect(req.get("Referer"))
+    res.redirect(`${systemConfig.prefixAdmin}/accounts`)
   } else {
     req.body.password = md5(req.body.password)
     let avatar = ""
@@ -99,7 +99,7 @@ export const createPost = async (req: Request, res: Response) => {
 }
 
 // [GET]: /admin/accounts/edit
-export const edit = async (req, res) => {
+export const edit = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
     const account = await Account.findOne({
@@ -120,7 +120,7 @@ export const edit = async (req, res) => {
 }
 
 // [PATCH]: /admin/accounts/edit
-export const editPatch = async (req, res) => {
+export const editPatch = async (req: Request, res: Response) => {
   const id = req.params.id
   const emailExit = await Account.findOne({
     _id: {
@@ -150,11 +150,11 @@ export const editPatch = async (req, res) => {
     })
     console.log("Cập nhật tài khoản thành công")  
   }
-  res.redirect(req.get("Referer"))
+  res.redirect(`${systemConfig.prefixAdmin}/accounts`)
 }
 
 // [PATCH]: /admin/accounts/delete
-export const deleteAccount = async (req, res) => {
+export const deleteAccount = async (req: Request, res: Response) => {
   const id = req.params.id
   const account = await Account.findOne({
     _id: id,
@@ -169,12 +169,12 @@ export const deleteAccount = async (req, res) => {
     deleted: true
   })
   console.log("Xóa tài khoản thành công")
-  res.redirect(req.get("Referer"))
+  res.redirect(`${systemConfig.prefixAdmin}/accounts`)
 }
 }
 
 // [GET]: /admin/accounts/detail
-export const detail = async (req, res) => {
+export const detail = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
     const account = await Account.findOne({
