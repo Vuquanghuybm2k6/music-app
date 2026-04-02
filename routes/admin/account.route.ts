@@ -19,4 +19,6 @@ router.patch(
   upload.fields([{ name: 'avatar', maxCount: 1 }]),
   uploadCloud.uploadFields,
   controller.editPatch)
+router.patch("/delete/:id", controller.deleteAccount)
+router.get("/detail/:id", controller.detail)
 export const accountRoutes: Router = router 

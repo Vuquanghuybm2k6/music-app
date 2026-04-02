@@ -100,6 +100,7 @@ export const edit = async (req, res) => {
     res.redirect(`${systemConfig.prefixAdmin}/accounts`)
   }
 }
+
 // [PATCH]: /admin/accounts/edit
 export const editPatch = async (req, res) => {
   const id = req.params.id
@@ -132,4 +133,46 @@ export const editPatch = async (req, res) => {
     console.log("Cập nhật tài khoản thành công")  
   }
   res.redirect(req.get("Referer"))
+}
+
+// [PATCH]: /admin/accounts/delete
+export const deleteAccount = async (req, res) => {
+  const id = req.params.id
+  const account = await Account.findOne({
+    _id: id,
+    deleted: false
+  })
+  if (!account) {
+    console.log("Không tìm thấy tài khoản")
+  } else {
+  await Account.updateOne({
+    _id: id
+  }, {
+    deleted: true
+  })
+  console.log("Xóa tài khoản thành công")
+  res.redirect(req.get("Referer"))
+}
+}
+
+// [GET]: /admin/accounts/detail
+export const detail = async (req, res) => {
+  try {
+    const id = req.params.id
+    const account = await Account.findOne({
+      _id: id,
+      deleted: false
+    }).select("-password -token")
+    const role = await Role.findOne({
+      _id: account?.role_id,
+      deleted: false
+    })
+    res.render("admin/pages/accounts/detail", {
+      pageTitle: "Chi tiết tài khoản",
+      account: account,
+      role: role
+    })
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/accounts`)
+  }
 }
