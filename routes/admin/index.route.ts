@@ -11,17 +11,18 @@ import { accountRoutes } from "./account.route"
 import { userRoutes } from "./users.route"
 import { settingRoutes } from "./setting.route"
 import { authRoutes } from "./auth.route"
+import { requireAuth } from "../../middlewares/admin/requireAuth.middleware"
 const adminRoutes = (app: Express):void =>{
   const PATH_ADMIN =   `${systemConfig.prefixAdmin}`
-  app.use(`${PATH_ADMIN}/dashboard`, dashboardRoutes)
-  app.use(`${PATH_ADMIN}/topics`, topicRoutes)
-  app.use(`${PATH_ADMIN}/songs`, songRoutes)
-  app.use(`${PATH_ADMIN}/upload`, uploadRoutes)
-  app.use(`${PATH_ADMIN}/singers`, singerRoutes)
-  app.use(`${PATH_ADMIN}/roles`, roleRoutes)
-  app.use(`${PATH_ADMIN}/accounts`, accountRoutes)
-  app.use(`${PATH_ADMIN}/users`, userRoutes)
-  app.use(`${PATH_ADMIN}/settings`, settingRoutes)
+  app.use(`${PATH_ADMIN}/dashboard`, requireAuth, dashboardRoutes)
+  app.use(`${PATH_ADMIN}/topics`, requireAuth, topicRoutes)
+  app.use(`${PATH_ADMIN}/songs`, requireAuth, songRoutes)
+  app.use(`${PATH_ADMIN}/upload`, requireAuth, uploadRoutes)
+  app.use(`${PATH_ADMIN}/singers`, requireAuth, singerRoutes)
+  app.use(`${PATH_ADMIN}/roles`, requireAuth, roleRoutes)
+  app.use(`${PATH_ADMIN}/accounts`, requireAuth, accountRoutes)
+  app.use(`${PATH_ADMIN}/users`, requireAuth, userRoutes)
+  app.use(`${PATH_ADMIN}/settings`, requireAuth, settingRoutes)
   app.use(`${PATH_ADMIN}/auth`, authRoutes)
 
 }
