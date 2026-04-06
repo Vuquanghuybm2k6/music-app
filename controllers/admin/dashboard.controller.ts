@@ -36,28 +36,28 @@ export const index = async (req: Request, res: Response) => {
   
     // Topic
     statistic.topic.total = await Topic.countDocuments({deleted: false})
-    statistic.topic.active = await Topic.countDocuments({status: "active"})
-    statistic.topic.inactive = await Topic.countDocuments({status: "inactive"})
+    statistic.topic.active = await Topic.countDocuments({deleted: false, status: "active"})
+    statistic.topic.inactive = await Topic.countDocuments({deleted: false, status: "inactive"})
     
     // Singer 
     statistic.singer.total = await Singer.countDocuments({deleted: false})
-    statistic.singer.active = await Singer.countDocuments({status: "active"})
-    statistic.singer.inactive = await Singer.countDocuments({status: "inactive"})
+    statistic.singer.active = await Singer.countDocuments({deleted: false, status: "active"})
+    statistic.singer.inactive = await Singer.countDocuments({deleted: false, status: "inactive"})
 
     // Song 
     statistic.song.total = await Song.countDocuments({deleted: false})
-    statistic.song.active = await Song.countDocuments({status: "active"})
-    statistic.song.inactive = await Song.countDocuments({status: "inactive"})
+    statistic.song.active = await Song.countDocuments({deleted: false, status: "active"})
+    statistic.song.inactive = await Song.countDocuments({deleted: false, status: "inactive"})
   
     // Admin
     statistic.account.total = await Account.countDocuments({deleted: false})
-    statistic.account.active = await Account.countDocuments({status: "active"})
-    statistic.account.inactive = await Account.countDocuments({status: "inactive"})
+    statistic.account.active = await Account.countDocuments({deleted: false, status: "active"})
+    statistic.account.inactive = await Account.countDocuments({deleted: false, status: "inactive"})
   
     // User
     statistic.user.total = await User.countDocuments({deleted: false})
-    statistic.user.active = await User.countDocuments({status: "active"})
-    statistic.user.inactive = await User.countDocuments({status: "inactive"})
+    statistic.user.active = await User.countDocuments({deleted: false, status: "active"})
+    statistic.user.inactive = await User.countDocuments({deleted: false, status: "inactive"})
     res.render("admin/pages/dashboard/index.pug",
       {
         pageTitle: "Trang dashboard",
