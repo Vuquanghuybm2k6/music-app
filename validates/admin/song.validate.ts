@@ -6,17 +6,12 @@ export const createPost = (req:Request,res: Response,next:NextFunction) =>{
     res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
     return
   }
-  if(!req.body.topic){
+  if(!req.body.topicId){
     req.flash("error", "Vui lòng nhập chủ đề bài hát")
     res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
     return
   }
-  if(!req.body.audio){
-    req.flash("error", "Vui lòng nhập đường link bài hát")
-    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
-    return
-  }
-  if(!req.body.singer){
+  if(!req.body.singerId){
     req.flash("error", "Vui lòng nhập tên ca sĩ")
     res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
     return

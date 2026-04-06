@@ -72,7 +72,7 @@ export const createPost = async (req: Request, res: Response) => {
   }
   const song = new Song(dataSong)
   await song.save()
-  res.redirect(`/${systemConfig.prefixAdmin}/songs`)
+  res.redirect(`${systemConfig.prefixAdmin}/songs`)
 }
 
 // [GET]: /admin/songs/edit/:id
