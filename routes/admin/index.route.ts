@@ -11,6 +11,7 @@ import { accountRoutes } from "./account.route"
 import { userRoutes } from "./users.route"
 import { settingRoutes } from "./setting.route"
 import { authRoutes } from "./auth.route"
+import { myAccountRoutes } from "./my-account.route"
 import { requireAuth } from "../../middlewares/admin/requireAuth.middleware"
 const adminRoutes = (app: Express):void =>{
   const PATH_ADMIN =   `${systemConfig.prefixAdmin}`
@@ -24,6 +25,7 @@ const adminRoutes = (app: Express):void =>{
   app.use(`${PATH_ADMIN}/users`, requireAuth, userRoutes)
   app.use(`${PATH_ADMIN}/settings`, requireAuth, settingRoutes)
   app.use(`${PATH_ADMIN}/auth`, authRoutes)
+  app.use(`${PATH_ADMIN}/my-account`, requireAuth, myAccountRoutes)
 
 }
 export default adminRoutes

@@ -8,6 +8,22 @@ database.connect()
 
 const app: Express = express();
 
+// Flash
+import session from "express-session"
+import cookieParser from 'cookie-parser'
+import flash from "express-flash"
+app.use(cookieParser('keyboard cat')) // lưu vào trong cookie
+app.use(session({
+  secret: 'keyboard cat', // ❗ bắt buộc phải có
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 60000
+  }
+}))
+app.use(flash())
+// End Flash
+
 app.use(express.static(`${__dirname}/public`))
 
 app.set("views", `${__dirname}/views`)
@@ -20,7 +36,7 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 app.use('/tinymce', express.static(path.join(__dirname,'node_modules','tinymce')))
 // End Tiny MCE
 
-import cookieParser from 'cookie-parser'
+
 
 var methodOverride = require('method-override')
 app.use(methodOverride('_method'))

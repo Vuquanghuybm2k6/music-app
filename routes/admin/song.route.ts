@@ -2,6 +2,7 @@ import {Router} from 'express'
 const router: Router = Router()
 import * as controller from "../../controllers/admin/song.controller"
 import * as uploadCloud from '../../middlewares/admin/uploadCloud'
+import * as validate from '../../validates/admin/song.validate'
 import multer from "multer"
 const upload = multer()
 router.get("/", controller.index)
@@ -14,6 +15,7 @@ router.post(
     { name: 'avatar', maxCount: 1 },
      { name: 'audio', maxCount: 1 }
     ]),
+  validate.createPost,
   uploadCloud.uploadFields,
   controller.createPost
 )
@@ -26,6 +28,7 @@ router.patch(
     { name: 'avatar', maxCount: 1 },
     { name: 'audio', maxCount: 1 }
     ]),
+  validate.editPatch,
   uploadCloud.uploadFields,
   controller.editPatch
   )

@@ -1,0 +1,49 @@
+import { Request, Response, NextFunction } from "express"
+import { systemConfig } from "../../config/system"
+export const createPost = (req:Request,res: Response,next:NextFunction) =>{
+  if(!req.body.title){
+    req.flash("error", "Vui lòng nhập tiêu đề")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.topic){
+    req.flash("error", "Vui lòng nhập chủ đề bài hát")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.audio){
+    req.flash("error", "Vui lòng nhập đường link bài hát")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.singer){
+    req.flash("error", "Vui lòng nhập tên ca sĩ")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+
+  next()
+}
+export const editPatch = (req:Request,res: Response,next:NextFunction) =>{
+  if(!req.body.title){
+    req.flash("error", "Vui lòng nhập tiêu đề")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.topic){
+    req.flash("error", "Vui lòng nhập chủ đề bài hát")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.audio){
+    req.flash("error", "Vui lòng nhập đường link bài hát")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  if(!req.body.singer){
+    req.flash("error", "Vui lòng nhập tên ca sĩ")
+    res.redirect(`${systemConfig.prefixAdmin}/songs/create`)
+    return
+  }
+  next()
+}

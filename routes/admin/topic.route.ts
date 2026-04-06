@@ -4,6 +4,7 @@ import * as controller from "../../controllers/admin/topic.controller"
 import multer from "multer"
 const upload = multer()
 import * as uploadCloud from '../../middlewares/admin/uploadCloud'
+import * as validate from '../../validates/admin/topic.validate'
 router.get("/", controller.index)
 
 router.patch("/delete/:idTopic", controller.deleteTopic)
@@ -11,6 +12,7 @@ router.get("/create", controller.create)
 router.post(
   "/create", 
   upload.single("avatar"),
+  validate.createPost,
   uploadCloud.uploadSingle,
   controller.createPost
 )
@@ -19,6 +21,7 @@ router.get("/edit/:id", controller.edit)
 router.patch(
   "/edit/:id", 
   upload.single("avatar"),
+  validate.editPatch,
   uploadCloud.uploadSingle,
   controller.editPatch
 )
