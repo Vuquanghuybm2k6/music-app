@@ -45,9 +45,6 @@ export const index = async (req: Request, res: Response) => {
       record.role = role
     }
   }
-  for(const record of records){
-    console.log(record._id)
-  }
 
   res.render("admin/pages/accounts/index", {
     pageTitle: "Danh sách tài khoản",
