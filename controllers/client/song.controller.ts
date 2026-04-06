@@ -10,6 +10,10 @@ export const list = async (req: Request, res: Response) => {
     status: "active",
     deleted: false
   })
+  if (!topic) {
+    res.status(404).send("Topic not found")
+    return
+  }
   console.log(topic.id)
   const songs = await Song.find({
     topicId: topic.id,
@@ -22,8 +26,8 @@ export const list = async (req: Request, res: Response) => {
       _id: song.singerId,
       status: "active",
       deleted: false
-    })
-    song["infoSinger"] = infoSinger
+    });
+    (song as any)["infoSinger"] = infoSinger || { fullName: "Không rõ" }
   }
   console.log(songs)
   res.render("client/pages/songs/list.pug",{
@@ -40,6 +44,10 @@ export const detail = async (req: Request, res: Response) => {
     status: "active",
     deleted: false
   })
+  if (!song) {
+    res.status(404).send("Song not found")
+    return
+  }
   const singer = await Singer.findOne({
     _id: song.singerId,
     deleted: false
@@ -50,8 +58,8 @@ export const detail = async (req: Request, res: Response) => {
   }).select("title")
   const favoriteSong = await FavoriteSong.findOne({
     songId: song.id
-  })
-  song["idFavoriteSong"] = FavoriteSong ? true : false
+  });
+  (song as any)["idFavoriteSong"] = favoriteSong ? true : false
   res.render("client/pages/songs/detail.pug",{
     pageTitle: "Chi tiết bài hát",
     song,
@@ -69,6 +77,10 @@ export const like = async (req: Request, res: Response) => {
     status: "active",
     deleted: false
   })
+  if (!song) {
+    res.status(404).json({ code: 404, message: "Song not found" })
+    return
+  }
   const newLike:number = typeLike == "like" ? song.like + 1 : song.like-1
   await Song.updateOne({
     _id: idSong,
@@ -121,6 +133,10 @@ export const listen = async (req: Request, res: Response) => {
     status: "active",
     deleted: false
   })
+  if (!song) {
+    res.status(404).json({ code: 404, message: "Song not found" })
+    return
+  }
   const listen: number = song.listen+1
 
   await Song.updateOne({
@@ -131,9 +147,13 @@ export const listen = async (req: Request, res: Response) => {
   const songNew = await Song.findOne({
     _id: idSong
   }) // do lượt nghe có thể sẽ tăng rất nhanh nên ta sẽ truy vấn lại để lấy lại lượt nghe cho đúng 
+  if (!songNew) {
+    res.status(404).json({ code: 404, message: "Song not found after update" })
+    return
+  }
   res.json({
     code:200,
     message: "Cập nhật lượt nghe thành công",
-    listen: songNew.like
+    listen: songNew.listen
   })
 }

@@ -32,7 +32,7 @@ export const result = async (req: Request, res: Response) => {
         like: item.like,
         slug: item.slug,
         infoSinger: {
-          fullName: infoSinger.fullName
+          fullName: infoSinger ? infoSinger.fullName : "Không rõ"
         }
       })
     }

@@ -159,7 +159,7 @@ export const detail = async (req: Request, res: Response) => {
     status: "active",
     deleted: false
   })
-  song["infoSinger"] = infoSinger
+  song["infoSinger"] = infoSinger || { fullName: "Không rõ" }
   song["topic"] = topic
     res.render("admin/pages/songs/detail",{
       pageTitle: "Chi tiết bài hát",

@@ -12,11 +12,12 @@ export const index = async (req: Request, res: Response) => {
     const infoSong = await Song.findOne({
       _id: item.songId
     })
+    if (!infoSong) continue
     const infoSinger = await Singer.findOne({
       _id: infoSong.singerId
-    })
-    item["infoSong"] = infoSong
-    item["infoSinger"] = infoSinger
+    });
+    (item as any)["infoSong"] = infoSong;
+    (item as any)["infoSinger"] = infoSinger || { fullName: "Không rõ" };
   }
   res.render("client/pages/favorite-songs/index.pug",{
     pageTitle: "Bài hát yêu thích",

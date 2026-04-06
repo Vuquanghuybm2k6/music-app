@@ -17,7 +17,7 @@ block main
                 a(href=`/songs/detail/${song.slug}`) #{song.title}
               div(class="inner-singer")
                 i(class="fa-solid fa-microphone-lines") 
-                | #{song.infoSinger.fullName}
+                | #{song.infoSinger ? song.infoSinger.fullName : 'Unknown'}
               div(class="inner-like")
                 i(class="fa-solid fa-thumbs-up") 
                 | #{song.like}
