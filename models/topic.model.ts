@@ -8,7 +8,7 @@ const topicSchema = new mongoose.Schema({
   status: String,
   slug: {
     type: String,
-    slug: "fullName",
+    slug: "title",
     unique: true
   },
   deleted: {

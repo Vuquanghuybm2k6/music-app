@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express"
 import User from "../../models/user.model"
 
-export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   if(!req.cookies.tokenUser){
     return res.redirect("/user/login")
   }
   else{
     const tokenUser = req.cookies.tokenUser
-    const user = User.findOne({
+    const user = await User.findOne({
       tokenUser: tokenUser,
       deleted: false
     })
