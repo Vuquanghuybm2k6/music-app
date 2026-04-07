@@ -1,0 +1,5 @@
+include ./song-item.pug
+mixin song-grid(songs)
+  .row
+    each item in songs 
+      +song-item(item)

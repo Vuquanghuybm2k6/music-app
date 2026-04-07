@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const topic_route_1 = require("./topic.route");
+const song_route_1 = require("./song.route");
+const favorite_song_route_1 = require("./favorite-song.route");
+const search_route_1 = require("./search.route");
+const page_route_1 = require("./page.route");
+const user_route_1 = require("./user.route");
+const requireAuth_middleware_1 = require("../../middlewares/client/requireAuth.middleware");
+const setting_middleware_1 = require("../../middlewares/client/setting.middleware");
+const optionalAuth_middleware_1 = require("../../middlewares/client/optionalAuth.middleware");
+const clientRoutes = (app) => {
+    app.use(setting_middleware_1.settingGeneral);
+    app.use("/topics", requireAuth_middleware_1.requireAuth, topic_route_1.topicRoutes);
+    app.use("/songs", requireAuth_middleware_1.requireAuth, song_route_1.songRoutes);
+    app.use("/favorite-songs", requireAuth_middleware_1.requireAuth, favorite_song_route_1.favoriteSongRoutes);
+    app.use("/search", requireAuth_middleware_1.requireAuth, search_route_1.searchRoutes);
+    app.use("/", optionalAuth_middleware_1.optionalAuth, page_route_1.homeRoutes);
+    app.use("/user", user_route_1.userRoutes);
+};
+exports.default = clientRoutes;
