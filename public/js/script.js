@@ -11,7 +11,7 @@ if(aplayer){
     lrcType: 1,
     audio: [{
         name: dataSong.title,
-        artist: dataSinger,
+        artist: dataSinger.fullName,
         url: dataSong.audio,
         cover: dataSong.avatar,
         lrc:`${dataSong.lyrics}`
