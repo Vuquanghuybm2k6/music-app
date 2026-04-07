@@ -57,9 +57,11 @@ export const detail = async (req: Request, res: Response) => {
     deleted: false
   }).select("title")
   const favoriteSong = await FavoriteSong.findOne({
+    userId: res.locals.user._id,
     songId: song.id
   });
-  (song as any)["idFavoriteSong"] = favoriteSong ? true : false
+  //(song as any)["idFavoriteSong"] = favoriteSong ? true : false
+  (song as any)["isFavoriteSong"] = favoriteSong ? true : false
   res.render("client/pages/songs/detail.pug",{
     pageTitle: "Chi tiết bài hát",
     song,
@@ -101,11 +103,12 @@ export const favorite = async (req: Request, res: Response) => {
   switch (typeFavorite){
     case "favorite":
       const existFavoriteSong = await FavoriteSong.findOne({
+        userId: res.locals.user.id,
         songId: idSong
       })
       if(!existFavoriteSong){
         const record = new FavoriteSong({
-          //userId: "",
+          userId: res.locals.user.id,
           songId: idSong
         })
         await record.save()
@@ -113,6 +116,7 @@ export const favorite = async (req: Request, res: Response) => {
       break
     case "unfavorite":
       await FavoriteSong.deleteOne({
+        userId: res.locals.user.id,
         songId: idSong
       })
       break

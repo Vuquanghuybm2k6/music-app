@@ -15,7 +15,6 @@ if(aplayer){
         url: dataSong.audio,
         cover: dataSong.avatar,
         lrc:`${dataSong.lyrics}`
-            // cột đầu là phút, cột hai là giây, cột ba là mili giây
     }],
     autoplay: true,
     volume: 0.8
